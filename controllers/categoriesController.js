@@ -1,11 +1,14 @@
-const categories = [
-  { id: 1, name: "wheels" },
-  { id: 2, name: "roller skates" },
-  { id: 3, name: "brands" },
-];
+const categories = require("../utils/categories");
+const items = require("../utils/items");
 
 const getAllCategories = (req, res) => {
-  res.render("allCategories", { categories });
+  res.render("categories", { categories });
 };
 
-module.exports = { getAllCategories };
+const getCategoryItems = (req, res) => {
+  const categoryID = req.params.id;
+  const filteredItems = items.filter((item) => item.categoryID == categoryID);
+  res.render("items", { items: filteredItems });
+};
+
+module.exports = { getAllCategories, getCategoryItems };

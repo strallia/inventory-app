@@ -1,23 +1,7 @@
-const items = [
-  {
-    id: 1,
-    categoryID: 1,
-    name: "Energy wheels",
-  },
-  {
-    id: 2,
-    categoryID: 2,
-    name: "Boardwalk skates",
-  },
-  {
-    id: 3,
-    categoryID: 3,
-    name: "Suregrip",
-  },
-];
+const items = require("../utils/items");
 
 const getAllItems = (req, res) => {
-  res.render("allItems", { items });
+  res.render("items", { items });
 };
 
 module.exports = { getAllItems };
