@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Items</title>
+  </head>
+  <body>
+    <%- include("partials/navigation") %>
+    <main>
+      <h1>All Items</h1>
+      <% items.forEach((item) => { %>
+      <div>
+        <h3><%= item.name %></h3>
+        <a href=<%= `/items/${item.id}` %>>Update</a>
+        <a href=<%= `/items/${item.id}` %>>Delete</a>
+      </div>
+      <% }); %>
+      <button><a href="/items/new">Add new item</a></button>
+    </main>
+  </body>
+</html>
