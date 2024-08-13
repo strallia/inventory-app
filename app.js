@@ -1,12 +1,14 @@
 require("dotenv").config();
 const express = require("express");
 const path = require("node:path");
+const methodOverride = require("method-override");
 const categoriesRouter = require("./routes/categoriesRoutes");
 const indexRouter = require("./routes/indexRoutes");
 const itemsRouter = require("./routes/itemsRoutes");
 
 const app = express();
 
+app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
