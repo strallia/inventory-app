@@ -23,7 +23,9 @@
         </form>
       </div>
       <% }); %>
-      <button><a href="/categories/new">Add new category</a></button>
+      <form action="/categories/new" method="GET">
+        <button type="submit" >Add new category</button>
+      </form>
     </main>
   </body>
 </html>

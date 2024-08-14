@@ -1,14 +1,26 @@
-let categories = require("../utils/categories");
+let { categories, runningCategoryID } = require("../utils/categories");
 const items = require("../utils/items");
 
 const getAllCategories = (req, res) => {
   res.render("categories", { categories });
 };
 
+const getAddCategoryForm = (req, res) => {
+  res.render("addCategoryForm");
+};
+
+const postAddCategory = (req, res) => {
+  const { name } = req.body;
+  const newCategory = { id: runningCategoryID.toString(), name };
+  runningCategoryID++;
+  categories.push(newCategory);
+  res.redirect("/categories");
+};
+
 const getUpdateCategoryForm = (req, res) => {
   const categoryID = req.params.id;
   const category = categories.find((category) => category.id == categoryID);
-  res.render("categoryForm", { category });
+  res.render("updateCategoryForm", { category });
 };
 
 const putUpdateCategory = (req, res) => {
@@ -36,6 +48,8 @@ const getCategoryItems = (req, res) => {
 
 module.exports = {
   getAllCategories,
+  getAddCategoryForm,
+  postAddCategory,
   getUpdateCategoryForm,
   putUpdateCategory,
   deleteCategory,
