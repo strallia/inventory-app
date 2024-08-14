@@ -1,16 +1,17 @@
 let { items, runningItemID } = require("../utils/items");
+let { categories } = require("../utils/categories");
 
 const getAllItems = (req, res) => {
   res.render("items", { items });
 };
 
 const getAddItemForm = (req, res) => {
-  res.render("addItemForm");
+  res.render("addItemForm", { categories });
 };
 
 const postAddItem = (req, res) => {
-  const { name } = req.body;
-  const newItem = { id: runningItemID.toString(), name };
+  const { name, categoryID } = req.body;
+  const newItem = { id: runningItemID.toString(), categoryID, name };
   runningItemID++;
   items.push(newItem);
   res.redirect("/items");

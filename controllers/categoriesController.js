@@ -1,5 +1,5 @@
 let { categories, runningCategoryID } = require("../utils/categories");
-const items = require("../utils/items");
+let { items } = require("../utils/items");
 
 const getAllCategories = (req, res) => {
   res.render("categories", { categories });
