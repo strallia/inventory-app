@@ -3,6 +3,8 @@ const categoriesRouter = Router();
 const categoriesController = require("../controllers/categoriesController");
 
 categoriesRouter.get("/", categoriesController.getAllCategories);
+categoriesRouter.get("/:id/update", categoriesController.getUpdateCategoryForm);
+categoriesRouter.put("/:id/update", categoriesController.putUpdateCategory);
 categoriesRouter.delete("/:id", categoriesController.deleteCategory);
 categoriesRouter.get("/:id", categoriesController.getCategoryItems);
 
