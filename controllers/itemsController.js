@@ -1,40 +1,39 @@
 let { items, runningItemID } = require("../utils/items");
 let { categories } = require("../utils/categories");
+const db = require("../db/queries");
 
-const getAllItems = (req, res) => {
+const getAllItems = async (req, res) => {
+  const items = await db.getAllItems();
   res.render("items", { items });
 };
 
-const getAddItemForm = (req, res) => {
+const getAddItemForm = async (req, res) => {
+  const categories = await db.getAllCategories();
   res.render("addItemForm", { categories });
 };
 
-const postAddItem = (req, res) => {
-  const { name, categoryID } = req.body;
-  const newItem = { id: runningItemID.toString(), categoryID, name };
-  runningItemID++;
-  items.push(newItem);
+const postAddItem = async (req, res) => {
+  const { title, categoryID } = req.body;
+  await db.addItem(title, categoryID);
   res.redirect("/items");
 };
 
-const deleteItem = (req, res) => {
+const deleteItem = async (req, res) => {
   const itemID = req.params.id;
-  const updatedItems = items.filter((item) => item.id !== itemID);
-  items = updatedItems;
+  await db.deleteItem(itemID);
   res.redirect("/items");
 };
 
-const getUpdateItemForm = (req, res) => {
+const getUpdateItemForm = async (req, res) => {
   const itemID = req.params.id;
-  const item = items.find((item) => item.id == itemID);
+  const item = await db.findItem(itemID);
   res.render("updateItemForm", { item });
 };
 
-const putUpdateItem = (req, res) => {
+const putUpdateItem = async (req, res) => {
   const itemID = req.params.id;
-  const { name } = req.body;
-  const item = items.find((item) => item.id == itemID);
-  item.name = name;
+  const { title } = req.body;
+  await db.updateItem(itemID, title);
   res.redirect(`/items`);
 };
 

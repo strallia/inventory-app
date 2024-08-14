@@ -11,14 +11,16 @@
       <h1>Add Item</h1>
       <form action="/items/new" method="POST">
         <label>
-          Name:
-          <input type="text" name="name" />
+          Title:
+          <input type="text" name="title" />
         </label>
         <label>
           Category:
           <select name="categoryID">
             <% categories.forEach((category) => { %>
-            <option value="<%= category.id %>"><%= category.id %></option>
+            <option value="<%= category.category_id %>">
+              <%= category.category_id %>
+            </option>
             <% }); %>
           </select>
         </label>
