@@ -1,7 +1,19 @@
-let items = require("../utils/items");
+let { items, runningItemID } = require("../utils/items");
 
 const getAllItems = (req, res) => {
   res.render("items", { items });
+};
+
+const getAddItemForm = (req, res) => {
+  res.render("addItemForm");
+};
+
+const postAddItem = (req, res) => {
+  const { name } = req.body;
+  const newItem = { id: runningItemID.toString(), name };
+  runningItemID++;
+  items.push(newItem);
+  res.redirect("/items");
 };
 
 const deleteItem = (req, res) => {
@@ -25,4 +37,11 @@ const putUpdateItem = (req, res) => {
   res.redirect(`/items`);
 };
 
-module.exports = { getAllItems, deleteItem, getUpdateItemForm, putUpdateItem };
+module.exports = {
+  getAllItems,
+  getAddItemForm,
+  postAddItem,
+  deleteItem,
+  getUpdateItemForm,
+  putUpdateItem,
+};

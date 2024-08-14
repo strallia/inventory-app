@@ -1,4 +1,4 @@
-module.exports = [
+let items = [
   {
     id: "1",
     categoryID: "1",
@@ -15,3 +15,7 @@ module.exports = [
     name: "Suregrip",
   },
 ];
+
+let runningItemID = 4;
+
+module.exports = { items, runningItemID };

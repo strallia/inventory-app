@@ -20,7 +20,9 @@
         </form>
       </div>
       <% }); %>
-      <button><a href="/items/new">Add new item</a></button>
+      <form action="/items/new" method="GET">
+        <button type="submit" >Add new item</button>
+      </form>
     </main>
   </body>
 </html>
