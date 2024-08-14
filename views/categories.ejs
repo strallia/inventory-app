@@ -18,7 +18,9 @@
         <form action=<%= `/categories/${category.id}?_method=DELETE` %> method="POST">
           <button type="submit">Delete</button>
         </form>
-        <a href=<%= `/categories/${category.id}` %>>Show Items</a>
+        <form action=<%= `/categories/${category.id}` %> method="GET">
+          <button type="submit" >Show Items</button>
+        </form>
       </div>
       <% }); %>
       <button><a href="/categories/new">Add new category</a></button>
