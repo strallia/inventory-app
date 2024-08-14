@@ -1,7 +1,7 @@
-let { categories, runningCategoryID } = require("../utils/categories");
-let { items } = require("../utils/items");
+const db = require("../db/queries");
 
-const getAllCategories = (req, res) => {
+const getAllCategories = async (req, res) => {
+  const categories = await db.getAllCategories();
   res.render("categories", { categories });
 };
 
@@ -9,40 +9,34 @@ const getAddCategoryForm = (req, res) => {
   res.render("addCategoryForm");
 };
 
-const postAddCategory = (req, res) => {
-  const { name } = req.body;
-  const newCategory = { id: runningCategoryID.toString(), name };
-  runningCategoryID++;
-  categories.push(newCategory);
+const postAddCategory = async (req, res) => {
+  const { title } = req.body;
+  await db.addCategory(title);
   res.redirect("/categories");
 };
 
-const getUpdateCategoryForm = (req, res) => {
+const getUpdateCategoryForm = async (req, res) => {
   const categoryID = req.params.id;
-  const category = categories.find((category) => category.id == categoryID);
+  const category = await db.findCategory(categoryID);
   res.render("updateCategoryForm", { category });
 };
 
-const putUpdateCategory = (req, res) => {
+const putUpdateCategory = async (req, res) => {
   const categoryID = req.params.id;
-  const { name } = req.body;
-  const category = categories.find((category) => category.id == categoryID);
-  category.name = name;
+  const { title } = req.body;
+  await db.updateCategory(categoryID, title);
   res.redirect(`/categories`);
 };
 
-const deleteCategory = (req, res) => {
+const deleteCategory = async (req, res) => {
   const categoryID = req.params.id;
-  const updatedCategories = categories.filter(
-    (category) => category.id !== categoryID
-  );
-  categories = updatedCategories;
+  await db.deleteCategory(categoryID);
   res.redirect("/categories");
 };
 
-const getCategoryItems = (req, res) => {
+const getCategoryItems = async (req, res) => {
   const categoryID = req.params.id;
-  const filteredItems = items.filter((item) => item.categoryID == categoryID);
+  const filteredItems = await db.getCategoryItems(categoryID);
   res.render("items", { items: filteredItems });
 };
 

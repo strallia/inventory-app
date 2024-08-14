@@ -9,10 +9,10 @@
     <%- include("partials/navigation") %>
     <main>
       <h1>Update Category</h1>
-      <form action=<%= `/categories/${category.id}/update?_method=PUT` %> method="POST">
+      <form action=<%= `/categories/${category.category_id}/update?_method=PUT` %> method="POST">
         <label> 
-          Name:
-          <input type="text" value="<%= category.name %>" name="name"/>
+          Title:
+          <input type="text" value="<%= category.title %>" name="title"/>
         </label>
         <button type="submit">Submit</button>
       </form>

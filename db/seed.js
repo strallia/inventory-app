@@ -1,11 +1,11 @@
 require("dotenv").config();
 const { Client } = require("pg");
 
-const { USER, PASSWORD, HOST, PORT, DATABASE } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE } = process.env;
 
 const SQL = `
   CREATE TABLE IF NOT EXISTS categories (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    category_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     title TEXT
   );
 
@@ -13,8 +13,8 @@ const SQL = `
   VALUES ('wheels'), ('roller skates'), ('brands');
 
   CREATE TABLE IF NOT EXISTS items (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    category_id INTEGER REFERENCES categories (id),
+    item_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    category_id INTEGER REFERENCES categories (category_id),
     title TEXT
   );
 
@@ -29,11 +29,11 @@ const seedDB = async () => {
   console.log("seeding database...");
   try {
     const client = new Client({
-      user: USER,
-      password: PASSWORD,
-      host: HOST,
-      port: PORT,
-      database: DATABASE,
+      user: DB_USER,
+      password: DB_PASSWORD,
+      host: DB_HOST,
+      port: DB_PORT,
+      database: DB_DATABASE,
     });
     await client.connect();
     await client.query(SQL);

@@ -11,14 +11,14 @@
       <h1>All Categories</h1>
       <% categories.forEach((category) => { %>
       <div>
-        <h3><%= category.name %></h3>
-        <form action=<%= `/categories/${category.id}/update` %> method="GET">
+        <h3><%= category.title %></h3>
+        <form action=<%= `/categories/${category.category_id}/update` %> method="GET">
           <button type="submit">Update</button>
         </form>
-        <form action=<%= `/categories/${category.id}?_method=DELETE` %> method="POST">
+        <form action=<%= `/categories/${category.category_id}?_method=DELETE` %> method="POST">
           <button type="submit">Delete</button>
         </form>
-        <form action=<%= `/categories/${category.id}` %> method="GET">
+        <form action=<%= `/categories/${category.category_id}` %> method="GET">
           <button type="submit" >Show Items</button>
         </form>
       </div>
