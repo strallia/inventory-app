@@ -11,8 +11,8 @@
       <h1>All Items</h1>
       <% items.forEach((item) => { %>
       <div>
-        <h3><%= item.title %></h3>
-        <p>category ID: <%= item.category_id %></p>
+        <h3><%= item.item_title %></h3>
+        <p>category: <%= item.category_title %></p>
         <form action=<%= `/items/${item.item_id}/update` %> method="GET">
           <button type="submit">Update</button>
         </form>

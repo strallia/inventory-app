@@ -38,7 +38,10 @@ const deleteCategory = async (categoryID) => {
 
 const getCategoryItems = async (categoryID) => {
   const { rows } = await pool.query(
-    "SELECT * FROM items WHERE category_id = $1",
+    `SELECT item_id, items.title AS item_title, categories.title AS category_title  
+    FROM items
+    JOIN categories ON items.category_id = categories.category_id
+    WHERE categories.category_id = $1`,
     [categoryID]
   );
   return rows;
@@ -49,7 +52,12 @@ const getCategoryItems = async (categoryID) => {
  */
 
 const getAllItems = async () => {
-  const { rows } = await pool.query("SELECT * FROM items ORDER BY item_id");
+  const { rows } = await pool.query(
+    `SELECT item_id, items.title AS item_title, categories.title AS category_title  
+    FROM items 
+    JOIN categories ON items.category_id = categories.category_id 
+    ORDER BY item_id`
+  );
   return rows;
 };
 
