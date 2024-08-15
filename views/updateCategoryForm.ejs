@@ -9,6 +9,9 @@
     <%- include("partials/navigation") %>
     <main>
       <h1>Update Category</h1>
+      <% if (locals.errors) { errors.forEach((error) => {%>
+        <p><strong><%= error.msg %></strong></p>
+      <% })}; %>
       <form action=<%= `/categories/${category.category_id}/update?_method=PUT` %> method="POST">
         <label> 
           Title:

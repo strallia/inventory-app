@@ -1,4 +1,13 @@
 const db = require("../db/queries");
+const { body, validationResult } = require("express-validator");
+
+const validateCategoryForm = [
+  body("title")
+    .notEmpty()
+    .withMessage("Title can not be empty.")
+    .isLength({ max: 30 })
+    .withMessage("Title can not be more than 30 characters"),
+];
 
 const getAllCategories = async (req, res) => {
   const categories = await db.getAllCategories();
@@ -9,11 +18,18 @@ const getAddCategoryForm = (req, res) => {
   res.render("addCategoryForm");
 };
 
-const postAddCategory = async (req, res) => {
-  const { title } = req.body;
-  await db.addCategory(title);
-  res.redirect("/categories");
-};
+const postAddCategory = [
+  validateCategoryForm,
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.render("addCategoryForm", { errors: errors.array() });
+    }
+    const { title } = req.body;
+    await db.addCategory(title);
+    res.redirect("/categories");
+  },
+];
 
 const getUpdateCategoryForm = async (req, res) => {
   const categoryID = req.params.id;
@@ -21,12 +37,23 @@ const getUpdateCategoryForm = async (req, res) => {
   res.render("updateCategoryForm", { category });
 };
 
-const putUpdateCategory = async (req, res) => {
-  const categoryID = req.params.id;
-  const { title } = req.body;
-  await db.updateCategory(categoryID, title);
-  res.redirect(`/categories`);
-};
+const putUpdateCategory = [
+  validateCategoryForm,
+  async (req, res) => {
+    const errors = validationResult(req);
+    const categoryID = req.params.id;
+    if (!errors.isEmpty()) {
+      const category = await db.findCategory(categoryID);
+      return res.render("updateCategoryForm", {
+        category,
+        errors: errors.array(),
+      });
+    }
+    const { title } = req.body;
+    await db.updateCategory(categoryID, title);
+    res.redirect(`/categories`);
+  },
+];
 
 const getDeleteCategoryForm = async (req, res) => {
   const categoryID = req.params.id;
