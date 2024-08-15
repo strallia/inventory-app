@@ -19,7 +19,7 @@
           <select name="categoryID">
             <% categories.forEach((category) => { %>
             <option value="<%= category.category_id %>">
-              <%= category.category_id %>
+              <%= category.title %>
             </option>
             <% }); %>
           </select>
