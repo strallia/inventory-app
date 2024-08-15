@@ -28,6 +28,13 @@ const putUpdateCategory = async (req, res) => {
   res.redirect(`/categories`);
 };
 
+const getDeleteCategoryForm = async (req, res) => {
+  const categoryID = req.params.id;
+  const category = await db.findCategory(categoryID);
+  const items = await db.getCategoryItems(categoryID);
+  res.render("deleteCategoryForm", { category, items });
+};
+
 const deleteCategory = async (req, res) => {
   const categoryID = req.params.id;
   await db.deleteCategory(categoryID);
@@ -46,6 +53,7 @@ module.exports = {
   postAddCategory,
   getUpdateCategoryForm,
   putUpdateCategory,
+  getDeleteCategoryForm,
   deleteCategory,
   getCategoryItems,
 };

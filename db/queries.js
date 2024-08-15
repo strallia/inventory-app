@@ -31,6 +31,7 @@ const updateCategory = async (categoryID, title) => {
 };
 
 const deleteCategory = async (categoryID) => {
+  await pool.query("DELETE FROM items WHERE category_id = $1", [categoryID]);
   await pool.query("DELETE FROM categories WHERE category_id = $1", [
     categoryID,
   ]);
