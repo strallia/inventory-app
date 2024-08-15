@@ -27,13 +27,14 @@ const deleteItem = async (req, res) => {
 const getUpdateItemForm = async (req, res) => {
   const itemID = req.params.id;
   const item = await db.findItem(itemID);
-  res.render("updateItemForm", { item });
+  const categories = await db.getAllCategories();
+  res.render("updateItemForm", { item, categories });
 };
 
 const putUpdateItem = async (req, res) => {
   const itemID = req.params.id;
-  const { title } = req.body;
-  await db.updateItem(itemID, title);
+  const { title, categoryID } = req.body;
+  await db.updateItem(itemID, title, categoryID);
   res.redirect(`/items`);
 };
 

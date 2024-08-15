@@ -79,11 +79,11 @@ const findItem = async (itemID) => {
   return rows[0];
 };
 
-const updateItem = async (itemID, title) => {
-  await pool.query("UPDATE items SET title = $1 WHERE item_id = $2", [
-    title,
-    itemID,
-  ]);
+const updateItem = async (itemID, title, categoryID) => {
+  await pool.query(
+    "UPDATE items SET title = $1, category_id = $2 WHERE item_id = $3",
+    [title, categoryID, itemID]
+  );
 };
 
 module.exports = {

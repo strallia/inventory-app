@@ -14,6 +14,20 @@
           Title:
           <input type="text" value="<%= item.title %>" name="title"/>
         </label>
+        <label>
+          Category:
+          <select name="categoryID">
+            <% categories.forEach((category) => { %>
+            <% const isSelected = item.category_id === category.category_id; %>
+            <option 
+              value="<%= category.category_id %>" 
+              <%- isSelected ? "selected" : "" %>
+            >
+              <%= category.title %>
+            </option>
+            <% }); %>
+          </select>
+        </label>
         <button type="submit">Submit</button>
       </form>
     </main>
