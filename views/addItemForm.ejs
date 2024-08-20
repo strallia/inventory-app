@@ -9,6 +9,7 @@
     <%- include("partials/navigation") %>
     <main>
       <h1>Add Item</h1>
+      <%- include("partials/errors", {errors: locals.errors}) %>
       <form action="/items/new" method="POST">
         <label>
           Title:
