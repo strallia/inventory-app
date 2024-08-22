@@ -3,26 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
     <title>Categories</title>
   </head>
   <body>
     <%- include("partials/navigation") %>
     <main>
       <h1>All Categories</h1>
+      <div class="content">
       <% categories.forEach((category) => { %>
-      <div>
-        <h3><%= category.title %></h3>
-        <form action=<%= `/categories/${category.category_id}/update` %> method="GET">
-          <button type="submit">Update</button>
-        </form>
-        <form action=<%= `/categories/${category.category_id}/delete` %> method="GET">
-          <button type="submit">Delete</button>
-        </form>
-        <form action=<%= `/categories/${category.category_id}` %> method="GET">
-          <button type="submit" >Show Items</button>
-        </form>
-      </div>
+        <div class="card">
+          <h3><%= category.title %></h3>
+          <div class="buttons-container">
+            <form action=<%= `/categories/${category.category_id}/update` %> method="GET">
+              <button type="submit">Update</button>
+            </form>
+            <form action=<%= `/categories/${category.category_id}/delete` %> method="GET">
+              <button type="submit">Delete</button>
+            </form>
+            <form action=<%= `/categories/${category.category_id}` %> method="GET">
+              <button type="submit" >Show Items</button>
+            </form>
+          </div>
+        </div>
       <% }); %>
+    </div>
       <form action="/categories/new" method="GET">
         <button type="submit" >Add new category</button>
       </form>

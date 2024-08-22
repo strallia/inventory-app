@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
     <title>Update Category</title>
   </head>
   <body>
@@ -10,14 +11,16 @@
     <main>
       <h1>Update Category</h1>
       <%- include("partials/errors", {errors: locals.errors}) %>
-      <form action=<%= `/categories/${category.category_id}/update?_method=PUT` %> method="POST">
-        <label> 
-          Title:
-          <input type="text" value="<%= category.title %>" name="title"/>
-        </label>
-        <%- include("partials/goBackButton") %>
-        <button type="submit">Submit</button>
-      </form>
+      <div class="content">
+        <form action=<%= `/categories/${category.category_id}/update?_method=PUT` %> method="POST">
+          <label> 
+            Title:
+            <input type="text" value="<%= category.title %>" name="title"/>
+          </label>
+          <%- include("partials/goBackButton") %>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     </main>
   </body>
 </html>

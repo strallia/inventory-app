@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
     <title>Update Item</title>
   </head>
   <body>
@@ -10,28 +11,30 @@
     <main>
       <h1>Update Item</h1>
       <%- include("partials/errors", {errors: locals.errors}) %>
-      <form action=<%= `/items/${item.item_id}/update?_method=PUT` %> method="POST">
-        <label> 
-          Title:
-          <input type="text" value="<%= item.title %>" name="title"/>
-        </label>
-        <label>
-          Category:
-          <select name="categoryID">
-            <% categories.forEach((category) => { %>
-            <% const isSelected = item.category_id === category.category_id; %>
-            <option 
-              value="<%= category.category_id %>" 
-              <%- isSelected ? "selected" : "" %>
-            >
-              <%= category.title %>
-            </option>
-            <% }); %>
-          </select>
-        </label>
-        <%- include("partials/goBackButton") %>
-        <button type="submit">Submit</button>
-      </form>
+      <div class="content">
+        <form action=<%= `/items/${item.item_id}/update?_method=PUT` %> method="POST">
+          <label> 
+            Title:
+            <input type="text" value="<%= item.title %>" name="title"/>
+          </label>
+          <label>
+            Category:
+            <select name="categoryID">
+              <% categories.forEach((category) => { %>
+              <% const isSelected = item.category_id === category.category_id; %>
+              <option 
+                value="<%= category.category_id %>" 
+                <%- isSelected ? "selected" : "" %>
+              >
+                <%= category.title %>
+              </option>
+              <% }); %>
+            </select>
+          </label>
+          <%- include("partials/goBackButton") %>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     </main>
   </body>
 </html>
