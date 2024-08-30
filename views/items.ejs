@@ -17,17 +17,17 @@
             <p>category: <%= item.category_title %></p>
             <div class="buttons-container">
               <form action=<%= `/items/${item.item_id}/update` %> method="GET">
-                <button type="submit">Update</button>
+                <button type="submit" class="update" title="update"></button>
               </form>
               <form action=<%= `/items/${item.item_id}?_method=DELETE` %> method="POST">
-                <button type="submit">Delete</button>
+                <button type="submit" class="delete" title="delete"></button>
               </form>
             </div>
           </div>
         <% }); %>
       </div>
       <form action="/items/new" method="GET">
-        <button type="submit" >Add new item</button>
+        <button type="submit" class="add" title="add new item"></button>
       </form>
     </main>
   </body>

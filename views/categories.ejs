@@ -16,20 +16,20 @@
           <h3><%= category.title %></h3>
           <div class="buttons-container">
             <form action=<%= `/categories/${category.category_id}/update` %> method="GET">
-              <button type="submit">Update</button>
+              <button type="submit" class="update" title="update"></button>
             </form>
             <form action=<%= `/categories/${category.category_id}/delete` %> method="GET">
-              <button type="submit">Delete</button>
+              <button type="submit" class="delete" title="delete"></button>
             </form>
             <form action=<%= `/categories/${category.category_id}` %> method="GET">
-              <button type="submit" >Show Items</button>
+              <button type="submit" class="show-items" title="show items"></button>
             </form>
           </div>
         </div>
       <% }); %>
     </div>
       <form action="/categories/new" method="GET">
-        <button type="submit" >Add new category</button>
+        <button type="submit" class="add" title="add new category"></button>
       </form>
     </main>
   </body>

@@ -7,6 +7,8 @@
 :root {
   --navy: #192841;
   --light-grey: rgb(180, 180, 180);
+  --light-blue: #0b7b9e;
+  font-size: 16px;
 }
 
 body {
@@ -67,6 +69,9 @@ main .content {
   padding: 15px;
   gap: 10px;
 }
+.card h3 {
+  text-transform: uppercase;
+}
 
 /* BUTTONS */
 .buttons-container {
@@ -77,18 +82,71 @@ main .content {
 button {
   text-wrap: nowrap;
   color: inherit;
-  background-color: whitesmoke;
   border: none;
   color: inherit;
   padding: 5px 10px;
   border-radius: 5px;
+  height: 30px;
+  width: 30px;
+  background-color: transparent;
 }
 button:hover {
   outline: 1px solid var(--light-grey);
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   cursor: pointer;
+  background-color: whitesmoke;
 }
 button:active {
   background-color: var(--light-grey);
   box-shadow: none;
+  outline: none;
+}
+.width-min-content {
+  width: min-content
+}
+button.primary {
+  background-color: var(--light-blue);
+  color: white;
+  font-size: 1.1rem;
+}
+button.primary:active {
+  background-color: var(--navy);
+}
+
+/* ICONS */
+button::before {
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  margin-top: -10px;
+  position: absolute; 
+  content: "";
+}
+.update::before {
+  background: url("icons/pencil.svg");
+  background-size: cover;
+}
+.delete::before {
+  background: url("icons/trash.svg");
+  background-size: cover;
+}
+.show-items::before {
+  background: url("icons/items.svg");
+  background-size: cover;
+}
+.favicon::before {
+  background: url("icons/favicon.svg");
+  background-size: cover;
+}
+.cancel::before {
+  background: url("icons/cancel.svg");
+  background-size: cover;
+}
+.submit::before {
+  background: url("icons/check.svg");
+  background-size: cover;
+}
+.add::before {
+  background: url("icons/add.svg");
+  background-size: cover;
 }

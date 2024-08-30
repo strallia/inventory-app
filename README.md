@@ -4,11 +4,7 @@
 
 ## Purpose
 
-To pratice creating an Express application with a PostgreSQL database and CRUD functionalities.
-
-## Features
-
-- Server side validation with express-validator
+To practice creating an Express application with a PostgreSQL database and CRUD functionalities.
 
 ## Tools Used
 
