@@ -9,28 +9,30 @@
   <body>
     <%- include("partials/navigation") %>
     <main>
-      <h1>All Categories</h1>
+      <header>
+        <h1>All Categories</h1>
+        <form action="/categories/new" method="GET">
+          <button type="submit" class="add" title="add new category"></button>
+        </form>
+      </header>
       <div class="content">
-      <% categories.forEach((category) => { %>
-        <div class="card">
-          <h3><%= category.title %></h3>
-          <div class="buttons-container">
-            <form action=<%= `/categories/${category.category_id}/update` %> method="GET">
-              <button type="submit" class="update" title="update"></button>
-            </form>
-            <form action=<%= `/categories/${category.category_id}/delete` %> method="GET">
-              <button type="submit" class="delete" title="delete"></button>
-            </form>
-            <form action=<%= `/categories/${category.category_id}` %> method="GET">
-              <button type="submit" class="show-items" title="show items"></button>
-            </form>
+        <% categories.forEach((category) => { %>
+          <div class="card">
+            <h3><%= category.title %></h3>
+            <div class="buttons-container">
+              <form action=<%= `/categories/${category.category_id}/update` %> method="GET">
+                <button type="submit" class="update" title="update"></button>
+              </form>
+              <form action=<%= `/categories/${category.category_id}/delete` %> method="GET">
+                <button type="submit" class="delete" title="delete"></button>
+              </form>
+              <form action=<%= `/categories/${category.category_id}` %> method="GET">
+                <button type="submit" class="show-items" title="show items"></button>
+              </form>
+            </div>
           </div>
-        </div>
-      <% }); %>
-    </div>
-      <form action="/categories/new" method="GET">
-        <button type="submit" class="add" title="add new category"></button>
-      </form>
+        <% }); %>
+      </div>
     </main>
   </body>
 </html>
