@@ -68,6 +68,19 @@ header {
   padding: 20px;
 }
 
+/* HOMEPAGE */
+.home.content {
+  grid-template-columns: auto auto;
+  gap: 80px;
+  padding: 20px;
+}
+.home.content > * {
+  width: min-content;
+}
+.home.content > :first-child {
+  margin-left: auto;
+}
+
 /* CARDS */
 .card {
   background-color: white;
