@@ -8,6 +8,7 @@
   --navy: #192841;
   --light-grey: rgb(180, 180, 180);
   --light-blue: #0b7b9e;
+  --red: #eb0000;
   font-size: 16px;
 }
 
@@ -172,4 +173,16 @@ button::before {
 .add::before {
   background: url("icons/add.svg");
   background-size: cover;
+}
+
+/* DELETE WARNING PAGE */
+.red {
+  color: var(--red);
+}
+.warning.content form {
+  display: grid;
+  gap: 10px;
+}
+.warning.content {
+  grid-template-columns: minmax(200px, 500px);
 }

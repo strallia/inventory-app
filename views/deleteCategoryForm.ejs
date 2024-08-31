@@ -10,20 +10,24 @@
     <%- include("partials/navigation") %>
     <main>
       <h1>Confirm Deletion</h1>
-      <div class="content">
-        <form action=<%= `/categories/${category.category_id}/delete?_method=DELETE` %> method="POST">
-          <h3>WARNING!</h3>
-          <p>Deleting this category will delete all of its items:</p>
-          <% if (items.length === 0) {%>
-              <p><em>(No items in this category)</em></p>
-          <% } else { %>
-            <% items.forEach((item => {%>
-              <li><%= item.item_title%></li>
-            <% })) %>
-          <% }; %>
-          <%- include("partials/goBackButton") %>
-          <button type="submit" class="submit" title="delete all"></button>  
-        </form>
+      <div class="content warning">
+        <div class="card">
+          <form action=<%= `/categories/${category.category_id}/delete?_method=DELETE` %> method="POST">
+            <h3 class="red">WARNING!</h3>
+            <p>Deleting this category will delete all of its items:</p>
+            <% if (items.length === 0) {%>
+                <p><em>(No items in this category)</em></p>
+            <% } else { %>
+              <% items.forEach((item => {%>
+                <li><%= item.item_title%></li>
+              <% })) %>
+            <% }; %>
+            <div class="buttons-container">
+              <%- include("partials/goBackButton") %>
+              <button type="submit" class="submit" title="delete all"></button>
+            </div>
+          </form>
+        </div>
       </div>
     </main>
   </body>
