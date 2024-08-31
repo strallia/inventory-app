@@ -186,3 +186,16 @@ button::before {
 .warning.content {
   grid-template-columns: minmax(200px, 500px);
 }
+
+/* FORMS */
+input, select {
+  border: 1px solid var(--light-grey);
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+form.add-category, form.add-item {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}

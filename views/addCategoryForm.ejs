@@ -12,13 +12,15 @@
       <h1>Add Category</h1>
       <%- include("partials/errors", {errors: locals.errors}) %>
       <div class="content">
-        <form action="/categories/new" method="POST">
+        <form action="/categories/new" method="POST" class="add-category">
           <label>
             Title:
             <input type="text" name="title" />
           </label>
-          <%- include("partials/goBackButton") %>
-          <button type="submit" class="submit" title="submit"></button>  
+          <div class="buttons-container">
+            <%- include("partials/goBackButton") %>
+            <button type="submit" class="submit" title="submit"></button>
+          </div>  
         </form>
       </div>
     </main>
