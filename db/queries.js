@@ -37,8 +37,9 @@ const deleteCategory = async (categoryID) => {
       categoryID,
     ]);
   } catch (err) {
-    if (err.message.includes("violates foreign key constraint")) return {message: "Cannot delete category because other items depend on its items."};
-    else console.log(err);
+    if (err.message.includes("violates foreign key constraint")) {
+      return {message: "Cannot delete category because other items depend on its items."};
+    } else console.log(err);
   }
 };
 
