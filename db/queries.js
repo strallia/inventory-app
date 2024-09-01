@@ -43,12 +43,22 @@ const deleteCategory = async (categoryID) => {
   }
 };
 
+const itemsTableWithForeignKeysResolved =  `
+  SELECT 
+    items.id, 
+    items.title AS item_title, 
+    categories.title AS category_title,
+    items2.title AS brand,
+    items3.title AS stock_wheels
+  FROM items
+  JOIN categories ON items.category_id = categories.id
+  LEFT JOIN items items2 ON items.brand_id = items2.id
+  LEFT JOIN items items3 ON items.stock_wheels_id = items3.id
+`;
+
 const getCategoryItems = async (categoryID) => {
   const { rows } = await pool.query(
-    `SELECT items.id, items.title AS item_title, categories.title AS category_title  
-    FROM items
-    JOIN categories ON items.category_id = categories.id
-    WHERE categories.id = $1`,
+    `${itemsTableWithForeignKeysResolved} WHERE categories.id = $1`,
     [categoryID]
   );
   return rows;
@@ -60,10 +70,7 @@ const getCategoryItems = async (categoryID) => {
 
 const getAllItems = async () => {
   const { rows } = await pool.query(
-    `SELECT item_id, items.title AS item_title, categories.title AS category_title  
-    FROM items 
-    JOIN categories ON items.category_id = categories.id 
-    ORDER BY item_id`
+    `${itemsTableWithForeignKeysResolved} ORDER BY items.id`
   );
   return rows;
 };

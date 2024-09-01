@@ -20,6 +20,12 @@
           <div class="card">
             <h3><%= item.item_title %></h3>
             <p>category: <%= item.category_title %></p>
+            <% if(item.brand) { %>
+              <p>brand: <%= item.brand %></p>
+            <% } %>
+            <% if(item.stock_wheels) { %>
+              <p>stock wheels: <%= item.stock_wheels %></p>
+            <% } %>
             <div class="buttons-container">
               <form action=<%= `/items/${item.item_id}/update` %> method="GET">
                 <button type="submit" class="update" title="update"></button>

@@ -16,11 +16,11 @@ const SQL = `
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     category_id INTEGER REFERENCES categories(id),
     title TEXT,
-    brand INTEGER REFERENCES items(id),
-    stock_wheels INTEGER REFERENCES items(id)
+    brand_id INTEGER REFERENCES items(id),
+    stock_wheels_id INTEGER REFERENCES items(id)
   );
 
-  INSERT INTO items (category_id, title, brand, stock_wheels)
+  INSERT INTO items (category_id, title, brand_id, stock_wheels_id)
   VALUES  
     (1, 'sure-grip', NULL, NULL),
     (1, 'bont', NULL, NULL),
