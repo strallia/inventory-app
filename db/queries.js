@@ -6,7 +6,7 @@ const pool = require("./pool");
 
 const getAllCategories = async () => {
   const { rows } = await pool.query(
-    "SELECT * FROM categories ORDER BY category_id"
+    "SELECT * FROM categories ORDER BY id"
   );
   return rows;
 };
@@ -17,32 +17,37 @@ const addCategory = async (title) => {
 
 const findCategory = async (categoryID) => {
   const { rows } = await pool.query(
-    "SELECT * FROM categories WHERE category_id = $1",
+    "SELECT * FROM categories WHERE id = $1",
     [categoryID]
   );
   return rows[0];
 };
 
 const updateCategory = async (categoryID, title) => {
-  await pool.query("UPDATE categories SET title = $1 WHERE category_id = $2", [
+  await pool.query("UPDATE categories SET title = $1 WHERE id = $2", [
     title,
     categoryID,
   ]);
 };
 
 const deleteCategory = async (categoryID) => {
-  await pool.query("DELETE FROM items WHERE category_id = $1", [categoryID]);
-  await pool.query("DELETE FROM categories WHERE category_id = $1", [
-    categoryID,
-  ]);
+  try {
+    await pool.query("DELETE FROM items WHERE category_id = $1", [categoryID]);
+    await pool.query("DELETE FROM categories WHERE id = $1", [
+      categoryID,
+    ]);
+  } catch (err) {
+    if (err.message.includes("violates foreign key constraint")) return {message: "Cannot delete category because other items depend on its items."};
+    else console.log(err);
+  }
 };
 
 const getCategoryItems = async (categoryID) => {
   const { rows } = await pool.query(
-    `SELECT item_id, items.title AS item_title, categories.title AS category_title  
+    `SELECT items.id, items.title AS item_title, categories.title AS category_title  
     FROM items
-    JOIN categories ON items.category_id = categories.category_id
-    WHERE categories.category_id = $1`,
+    JOIN categories ON items.category_id = categories.id
+    WHERE categories.id = $1`,
     [categoryID]
   );
   return rows;
@@ -56,7 +61,7 @@ const getAllItems = async () => {
   const { rows } = await pool.query(
     `SELECT item_id, items.title AS item_title, categories.title AS category_title  
     FROM items 
-    JOIN categories ON items.category_id = categories.category_id 
+    JOIN categories ON items.category_id = categories.id 
     ORDER BY item_id`
   );
   return rows;

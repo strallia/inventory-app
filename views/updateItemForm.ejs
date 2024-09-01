@@ -21,9 +21,9 @@
             Category:
             <select name="categoryID">
               <% categories.forEach((category) => { %>
-              <% const isSelected = item.category_id === category.category_id; %>
+              <% const isSelected = item.category_id === category.id; %>
               <option 
-                value="<%= category.category_id %>" 
+                value="<%= category.id %>" 
                 <%- isSelected ? "selected" : "" %>
               >
                 <%= category.title %>

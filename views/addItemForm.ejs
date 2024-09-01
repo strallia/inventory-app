@@ -21,7 +21,7 @@
             Category:
             <select name="categoryID">
               <% categories.forEach((category) => { %>
-              <option value="<%= category.category_id %>">
+              <option value="<%= category.id %>">
                 <%= category.title %>
               </option>
               <% }); %>
