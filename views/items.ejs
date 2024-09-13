@@ -27,10 +27,10 @@
               <p>stock wheels: <%= item.stock_wheels %></p>
             <% } %>
             <div class="buttons-container">
-              <form action=<%= `/items/${item.item_id}/update` %> method="GET">
+              <form action=<%= `/items/${item.id}/update` %> method="GET">
                 <button type="submit" class="update" title="update"></button>
               </form>
-              <form action=<%= `/items/${item.item_id}?_method=DELETE` %> method="POST">
+              <form action=<%= `/items/${item.id}?_method=DELETE` %> method="POST">
                 <button type="submit" class="delete" title="delete"></button>
               </form>
             </div>

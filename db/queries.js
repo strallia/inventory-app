@@ -86,7 +86,7 @@ const addItem = async (title, categoryID, brandID, wheelsID) => {
 };
 
 const deleteItem = async (itemID) => {
-  await pool.query("DELETE FROM items WHERE item_id = $1", [itemID]);
+  await pool.query("DELETE FROM items WHERE id = $1", [itemID]);
 };
 
 const findItem = async (itemID) => {
