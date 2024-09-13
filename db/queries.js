@@ -75,11 +75,14 @@ const getAllItems = async () => {
   return rows;
 };
 
-const addItem = async (title, categoryID) => {
-  await pool.query("INSERT INTO items (title, category_id) VALUES ($1, $2)", [
-    title,
-    categoryID,
-  ]);
+const addItem = async (title, categoryID, brandID, wheelsID) => {
+  const optionalBrandID = brandID ? brandID : null;
+  const optionalWheelsID = wheelsID ? wheelsID : null;
+  await pool.query(
+    `INSERT INTO items (title, category_id, brand_id, stock_wheels_id)
+    VALUES ($1, $2, $3, $4)`,
+    [title, categoryID, optionalBrandID, optionalWheelsID]
+  );
 };
 
 const deleteItem = async (itemID) => {
@@ -100,6 +103,26 @@ const updateItem = async (itemID, title, categoryID) => {
   );
 };
 
+const getAllBrands = async () => {
+  const {rows} = await pool.query(
+    `SELECT items.id, items.title
+    FROM items
+    JOIN categories ON items.category_id = categories.id
+    WHERE categories.title = 'brands'`
+  );
+  return rows;
+};
+
+const getAllWheels = async () => {
+  const {rows} = await pool.query(
+    `SELECT items.id, items.title
+    FROM items
+    JOIN categories ON items.category_id = categories.id
+    WHERE categories.title = 'wheels'`
+  );
+  return rows;
+};
+
 module.exports = {
   getAllCategories,
   addCategory,
@@ -112,4 +135,6 @@ module.exports = {
   deleteItem,
   findItem,
   updateItem,
+  getAllBrands,
+  getAllWheels
 };

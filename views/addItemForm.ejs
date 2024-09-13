@@ -27,6 +27,28 @@
               <% }); %>
             </select>
           </label>
+          <label>
+            What brand is this item?
+            <select name="brandID" disabled>
+              <option value>n/a</option>
+              <% brands.forEach((brand) => { %>
+              <option value="<%= brand.id %>">
+                <%= brand.title %>
+              </option>
+              <% }); %>
+            </select>
+          </label>
+          <label>
+            What stock wheels does it come with?
+            <select name="wheelsID" disabled>
+              <option value>n/a</option>
+              <% wheels.forEach((wheel) => { %>
+              <option value="<%= wheel.id %>">
+                <%= wheel.title %>
+              </option>
+              <% }); %>
+            </select>
+          </label>
           <div class="buttons-container">
             <%- include("partials/goBackButton") %>
             <button type="submit" class="submit" title="submit"></button>
@@ -34,5 +56,29 @@
         </form>
       </div>
     </main>
+    <script>
+      const selectCategory = document.querySelector("select[name='categoryID']");
+      const selectBrand = document.querySelector("select[name='brandID']");
+      const selectWheels = document.querySelector("select[name='wheelsID']");
+
+      // disable select options that are unrelated to selected category
+      selectCategory.addEventListener('change', () => {
+        if (selectCategory.value == 1) {
+          // if user chooses category "brands"
+          selectBrand.disabled = true;
+          selectWheels.disabled = true;
+        } else if (selectCategory.value == 2) {
+          // if user chooses category "wheels"
+          selectBrand.disabled = false;
+          selectWheels.disabled = true;
+         } else {
+          // if user chooses category "skates" 
+          // or any other user-added category 
+          selectBrand.disabled = false;
+          selectWheels.disabled = false;
+        }
+      });
+    
+    </script>
   </body>
 </html>

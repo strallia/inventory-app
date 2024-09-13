@@ -44,7 +44,7 @@ nav a:hover {
 main {
   background-color: whitesmoke;
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: repeat(3, min-content);
   grid-template-columns: minmax(300px, 1000px);
   justify-content: center;
   text-align: center;
@@ -57,7 +57,7 @@ main .content {
   grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
   gap: 15px;
   grid-auto-rows: min-content;
-  padding: 0 20px;
+  padding: 0 20px 20px 20px;
   justify-content: center;
 }
 
@@ -198,4 +198,14 @@ form.add-category, form.add-item {
   align-items: center;
   justify-content: center;
   gap: 20px;
+}
+label {
+  width: max-content;
+  justify-self: center;
+}
+
+/* ERRORS CONTAINER */
+.errors-container {
+  margin-bottom: 20px;
+  color: var(--red);
 }
