@@ -193,7 +193,7 @@ input, select {
   border-radius: 5px;
   padding: 5px 10px;
 }
-form.add-category, form.add-item {
+form.add-category, form.add-item, form.update-item {
   display: grid;
   align-items: center;
   justify-content: center;

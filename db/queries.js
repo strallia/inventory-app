@@ -90,16 +90,18 @@ const deleteItem = async (itemID) => {
 };
 
 const findItem = async (itemID) => {
-  const { rows } = await pool.query("SELECT * FROM items WHERE item_id = $1", [
+  const { rows } = await pool.query("SELECT * FROM items WHERE id = $1", [
     itemID,
   ]);
   return rows[0];
 };
 
-const updateItem = async (itemID, title, categoryID) => {
+const updateItem = async (itemID, title, categoryID, brandID, wheelsID) => {
+  const optionalBrandID = brandID ? brandID : null;
+  const optionalWheelsID = wheelsID ? wheelsID : null;
   await pool.query(
-    "UPDATE items SET title = $1, category_id = $2 WHERE item_id = $3",
-    [title, categoryID, itemID]
+    "UPDATE items SET title = $1, category_id = $2, brand_id = $3, stock_wheels_id = $4 WHERE id = $5",
+    [title, categoryID, optionalBrandID, optionalWheelsID, itemID]
   );
 };
 

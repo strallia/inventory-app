@@ -51,10 +51,17 @@ const deleteItem = async (req, res) => {
 };
 
 const getUpdateItemForm = async (req, res) => {
+  const { errors } = req.query;
   const itemID = req.params.id;
   const item = await db.findItem(itemID);
   const categories = await db.getAllCategories();
-  res.render("updateItemForm", { item, categories });
+  const brands = await db.getAllBrands();
+  const wheels = await db.getAllWheels();
+  if (errors) {
+    const errorsArr = JSON.parse(errors);
+    return res.render("updateItemForm", { item, categories, brands, wheels, errors: errorsArr });
+  }
+  res.render("updateItemForm", { item, categories, brands, wheels });
 };
 
 const putUpdateItem = [
@@ -63,16 +70,12 @@ const putUpdateItem = [
     const itemID = req.params.id;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      const item = await db.findItem(itemID);
-      const categories = await db.getAllCategories();
-      return res.render("updateItemForm", {
-        item,
-        categories,
-        errors: errors.array(),
-      });
+      const errorsArr = errors.array();
+      const urlEncoded = encodeURIComponent(JSON.stringify(errorsArr));
+      return res.redirect(`/items/${itemID}/update?errors=${urlEncoded}`);
     }
-    const { title, categoryID } = req.body;
-    await db.updateItem(itemID, title, categoryID);
+    const {title, categoryID, brandID, wheelsID} = req.body;
+    await db.updateItem(itemID, title, categoryID, brandID, wheelsID);
     res.redirect(`/items`);
   },
 ];

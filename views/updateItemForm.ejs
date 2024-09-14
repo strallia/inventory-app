@@ -12,7 +12,7 @@
       <h1>Update Item</h1>
       <%- include("partials/errors", {errors: locals.errors}) %>
       <div class="content">
-        <form action=<%= `/items/${item.item_id}/update?_method=PUT` %> method="POST">
+        <form action=<%= `/items/${item.id}/update?_method=PUT` %> method="POST" class="update-item">
           <label> 
             Title:
             <input type="text" value="<%= item.title %>" name="title"/>
@@ -21,20 +21,81 @@
             Category:
             <select name="categoryID">
               <% categories.forEach((category) => { %>
-              <% const isSelected = item.category_id === category.id; %>
-              <option 
-                value="<%= category.id %>" 
-                <%- isSelected ? "selected" : "" %>
-              >
-                <%= category.title %>
-              </option>
+                <% const isSelected = item.category_id === category.id; %>
+                <option 
+                  value="<%= category.id %>" 
+                  <%- isSelected ? "selected" : "" %>
+                >
+                  <%= category.title %>
+                </option>
               <% }); %>
             </select>
           </label>
-          <%- include("partials/goBackButton") %>
-          <button type="submit" class="submit" title="submit"></button>
+          <label>
+            What brand is this item?
+            <select name="brandID" >
+              <option value>n/a</option>
+              <% brands.forEach((brand) => { %>
+                <% const isSelected = item.brand_id === brand.id; %>
+                <option 
+                  value="<%= brand.id %>"
+                  <%- isSelected ? "selected" : "" %>
+                >
+                  <%= brand.title %>
+                </option>
+              <% }); %>
+            </select>
+          </label>
+          <label>
+            What stock wheels does it come with?
+            <select name="wheelsID">
+              <option value>n/a</option>
+              <% wheels.forEach((wheel) => { %>
+                <% const isSelected = item.stock_wheels_id === wheel.id; %>
+                <option 
+                  value="<%= wheel.id %>"
+                  <%- isSelected ? "selected" : "" %>
+                >
+                  <%= wheel.title %>
+                </option>
+              <% }); %>
+            </select>
+          </label>
+          <div class="buttons-container">
+            <%- include("partials/goBackButton") %>
+            <button type="submit" class="submit" title="submit"></button>
+          </div> 
         </form>
       </div>
     </main>
+    <script>
+      const selectCategory = document.querySelector("select[name='categoryID']");
+      const selectBrand = document.querySelector("select[name='brandID']");
+      const selectWheels = document.querySelector("select[name='wheelsID']");
+
+      // disable select options that are unrelated to selected category
+      const disableInputs = () => {
+        if (selectCategory.value == 1) {
+          // if user chooses category "brands"
+          selectBrand.disabled = true;
+          selectWheels.disabled = true;
+          selectBrand.selectedIndex = 0;
+          selectWheels.selectedIndex = 0;
+        } else if (selectCategory.value == 2) {
+          // if user chooses category "wheels"
+          selectBrand.disabled = false;
+          selectWheels.disabled = true;
+          selectWheels.selectedIndex = 0;
+         } else {
+          // if user chooses category "skates" 
+          // or any other user-added category 
+          selectBrand.disabled = false;
+          selectWheels.disabled = false;
+        }
+      };
+      disableInputs();
+
+      selectCategory.addEventListener('change', disableInputs);
+    </script>
   </body>
 </html>
