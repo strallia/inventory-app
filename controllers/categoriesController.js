@@ -64,8 +64,12 @@ const getDeleteCategoryForm = async (req, res) => {
 
 const deleteCategory = async (req, res) => {
   const categoryID = req.params.id;
-  await db.deleteCategory(categoryID);
-  res.redirect("/categories");
+  const error = await db.deleteCategory(categoryID);
+  if (error) {
+    res.render("cannotDeleteCategory", {error: error.message});
+  } else {
+    res.redirect("/categories");
+  }
 };
 
 const getCategoryItems = async (req, res) => {

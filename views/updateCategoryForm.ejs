@@ -12,7 +12,7 @@
       <h1>Update Category</h1>
       <%- include("partials/errors", {errors: locals.errors}) %>
       <div class="content">
-        <form action=<%= `/categories/${category.category_id}/update?_method=PUT` %> method="POST">
+        <form action=<%= `/categories/${category.id}/update?_method=PUT` %> method="POST">
           <label> 
             Title:
             <input type="text" value="<%= category.title %>" name="title"/>

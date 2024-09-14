@@ -1,0 +1,29 @@
+<script>
+  const selectCategory = document.querySelector("select[name='categoryID']");
+  const selectBrand = document.querySelector("select[name='brandID']");
+  const selectWheels = document.querySelector("select[name='wheelsID']");
+
+  // disable select options that are unrelated to selected category
+  const disableInputs = () => {
+    if (selectCategory.value == 1) {
+      // if user chooses category "brands"
+      selectBrand.disabled = true;
+      selectWheels.disabled = true;
+      selectBrand.selectedIndex = 0;
+      selectWheels.selectedIndex = 0;
+    } else if (selectCategory.value == 2) {
+      // if user chooses category "wheels"
+      selectBrand.disabled = false;
+      selectWheels.disabled = true;
+      selectWheels.selectedIndex = 0;
+      } else {
+      // if user chooses category "skates" 
+      // or any other user-added category 
+      selectBrand.disabled = false;
+      selectWheels.disabled = false;
+    }
+  };
+  disableInputs();
+
+  selectCategory.addEventListener('change', disableInputs);
+</script>

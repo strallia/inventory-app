@@ -21,8 +21,30 @@
             Category:
             <select name="categoryID">
               <% categories.forEach((category) => { %>
-              <option value="<%= category.category_id %>">
+              <option value="<%= category.id %>">
                 <%= category.title %>
+              </option>
+              <% }); %>
+            </select>
+          </label>
+          <label>
+            What brand is this item?
+            <select name="brandID" disabled>
+              <option value>n/a</option>
+              <% brands.forEach((brand) => { %>
+              <option value="<%= brand.id %>">
+                <%= brand.title %>
+              </option>
+              <% }); %>
+            </select>
+          </label>
+          <label>
+            What stock wheels does it come with?
+            <select name="wheelsID" disabled>
+              <option value>n/a</option>
+              <% wheels.forEach((wheel) => { %>
+              <option value="<%= wheel.id %>">
+                <%= wheel.title %>
               </option>
               <% }); %>
             </select>
@@ -34,5 +56,6 @@
         </form>
       </div>
     </main>
+    <%- include("partials/disableInputsScript") %>
   </body>
 </html>

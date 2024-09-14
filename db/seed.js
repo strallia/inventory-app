@@ -5,24 +5,33 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE } = process.env;
 
 const SQL = `
   CREATE TABLE IF NOT EXISTS categories (
-    category_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     title TEXT
   );
 
   INSERT INTO categories (title)
-  VALUES ('wheels'), ('roller skates'), ('brands');
+  VALUES ('brands'), ('wheels'), ('skates');
 
   CREATE TABLE IF NOT EXISTS items (
-    item_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    category_id INTEGER REFERENCES categories (category_id),
-    title TEXT
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    category_id INTEGER REFERENCES categories(id),
+    title TEXT,
+    brand_id INTEGER REFERENCES items(id),
+    stock_wheels_id INTEGER REFERENCES items(id)
   );
 
-  INSERT INTO items (category_id, title)
-  VALUES 
-    (1, 'energy wheels'), 
-    (2, 'boardwalk skates'), 
-    (3, 'suregrip brand');
+  INSERT INTO items (category_id, title, brand_id, stock_wheels_id)
+  VALUES  
+    (1, 'sure-grip', NULL, NULL),
+    (1, 'bont', NULL, NULL),
+    (1, 'moxi', NULL, NULL),
+    (1, 'luminous', NULL, NULL),
+    (2, 'sure-grip oasis', 1, NULL), 
+    (2, 'bont glide', 2, NULL), 
+    (2, 'moxi classic', 3, NULL),
+    (3, 'sure-grip boardwalk', 1, 5),
+    (3, 'bont parkstar', 2, 6),
+    (3, 'moxi lolly', 3, 7);
 `;
 
 const seedDB = async () => {

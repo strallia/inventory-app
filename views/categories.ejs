@@ -20,13 +20,13 @@
           <div class="card">
             <h3><%= category.title %></h3>
             <div class="buttons-container">
-              <form action=<%= `/categories/${category.category_id}/update` %> method="GET">
+              <form action=<%= `/categories/${category.id}/update` %> method="GET">
                 <button type="submit" class="update" title="update"></button>
               </form>
-              <form action=<%= `/categories/${category.category_id}/delete` %> method="GET">
+              <form action=<%= `/categories/${category.id}/delete` %> method="GET">
                 <button type="submit" class="delete" title="delete"></button>
               </form>
-              <form action=<%= `/categories/${category.category_id}` %> method="GET">
+              <form action=<%= `/categories/${category.id}` %> method="GET">
                 <button type="submit" class="show-items" title="show items"></button>
               </form>
             </div>
