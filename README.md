@@ -1,14 +1,14 @@
 # Inventory App
 
-<!-- [Live Demo]() -->
+[Live Demo](https://inventory-app-production-a36b.up.railway.app/)
 
 ## Purpose
 
-To practice creating an Express application with a PostgreSQL database and CRUD functionalities.
+To create a server-side rendered web app using Express with a PostgreSQL database and CRUD functionalities.
 
 ## Tools Used
 
-Express, Node, PostgreSQL
+Express, Node, PostgreSQL, EJS
 
 ## Database Schema
 
