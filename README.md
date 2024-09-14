@@ -9,3 +9,7 @@ To practice creating an Express application with a PostgreSQL database and CRUD 
 ## Tools Used
 
 Express, Node, PostgreSQL
+
+## Database Schema
+
+![Database schema diagram](./public/db_schema.svg)
