@@ -56,28 +56,6 @@
         </form>
       </div>
     </main>
-    <script>
-      const selectCategory = document.querySelector("select[name='categoryID']");
-      const selectBrand = document.querySelector("select[name='brandID']");
-      const selectWheels = document.querySelector("select[name='wheelsID']");
-
-      // disable select options that are unrelated to selected category
-      selectCategory.addEventListener('change', () => {
-        if (selectCategory.value == 1) {
-          // if user chooses category "brands"
-          selectBrand.disabled = true;
-          selectWheels.disabled = true;
-        } else if (selectCategory.value == 2) {
-          // if user chooses category "wheels"
-          selectBrand.disabled = false;
-          selectWheels.disabled = true;
-         } else {
-          // if user chooses category "skates" 
-          // or any other user-added category 
-          selectBrand.disabled = false;
-          selectWheels.disabled = false;
-        }
-      });
-    </script>
+    <%- include("partials/disableInputsScript") %>
   </body>
 </html>
